@@ -1,18 +1,5 @@
 #include "Index.h"
 
-struct freq{
-    string file;
-    int t;
-    freq(){
-        file = "";
-        t = 0;
-    }
-    freq(string s, int n){
-        file = s;
-        t = n;
-    }
-};
-
 
 Index::Index() : base_(map<string,vector<freq> >()){
 }
@@ -27,7 +14,7 @@ void Index::Form(vector<string>& vc)
                vc[i].begin()[j]=='?'||vc[i].begin()[j]=='!'||vc[i].begin()[j]=='@'||vc[i].begin()[j]=='\\'||
                vc[i].begin()[j]==':'||vc[i].begin()[j]==';'||vc[i].begin()[j]=='*'||vc[i].begin()[j]=='('||
                vc[i].begin()[j]==')'||vc[i].begin()[j]=='['||vc[i].begin()[j]==']'||vc[i].begin()[j]=='{'||
-               vc[i].begin()[j]=='}')
+               vc[i].begin()[j]=='}'|| vc[i].begin()[j]=='\''|| vc[i].begin()[j]=='\"')
             {
                 vc[i].erase(vc[i].begin()+j);
             }
@@ -43,14 +30,13 @@ Index::Index(string c): Index(){
     freq auxf;
     auxf.file = c;
     auxf.t = 1;
+    auxv.push_back(auxf);
     //para cada i-ésima palavra
-    for(unsigned long int i=0;i<vc.size();i++){
-            //se a palavra não está no mapa
+    for(unsigned int i=0;i<vc.size();i++){
+            cout<<i<<":"<<vc[i]<<endl;
         if (base_.count(vc[i])==0){
-            vvf[i][0].file = c;
-            vvf[i][0].t=1;
-            //mymap.insert ( std::pair<char,int>('a',100) )
-            base_[vc[i]] = vvf[i];
+            vvf.push_back(auxv);
+            base_.insert(pair<string, vector<freq> >(vc[i],vvf[i]));
         } else {
             base_[vc[i]][0].t++;
         }

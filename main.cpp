@@ -6,11 +6,10 @@
 #include "Index.h"
 int main()
 {
-    unsigned int i;
     vector<string> c;
     vector<string> d;
     string sup;
-    cout<< "Coloque todos os arquivos que voce deseja ler no diretório Resources dentro do projeto"<<endl;
+    /*cout<< "Coloque todos os arquivos que voce deseja ler no diretório Resources dentro do projeto"<<endl;
     cout << "Quais os nomes dos arquivos (seguidos da extensão) que voce deseja usar para construir o banco de dados?" << endl;
     cout<<"Ex1: Notas.txt"<<endl;
     cout<<"Ex2:FilaComListaEncadeada.txt"<<endl;
@@ -20,23 +19,30 @@ int main()
         cin>>sup;
         c.push_back(sup);
     }
-    c.pop_back();
-    ifstream arq;
-    arq.open("Resources\\"+c[0]);
-    if(arq.fail()){
-        cerr<<"Falha ao abrir o arquivo "<<c[0]<<endl;
+    c.pop_back();*/
+    c.push_back("shake.txt");
+    cout<<"o god why"<<endl;
+    Index in(c[0]);
+    /*struct freq f;
+    f.file="ubba.txt";
+    f.t=1;
+    struct freq f2;
+    f2 = f;
+    f2.t++;*/
+    if(in.base_["ubba"][0].t!=1||in.base_["ubba"][0].file!="ubba.txt"){
+        cout<<"erro 1\n";
+    }else{
+        cout<<"1 OK\n";
     }
-    copy(istream_iterator<string>(arq), istream_iterator<string>(), back_inserter(d));
-
-    //form
-
-     for(i=0;i<d.size();i++){
-        transform(d[i].begin(), d[i].end(), d[i].begin(), ::tolower);
-        cout<<d[i]<<endl;
+    if(in.base_["lubba"][0].t!=1||in.base_["lubba"][0].file!="ubba.txt"){
+        cout<<"erro 1\n";
+    }else{
+        cout<<"2 OK\n";
     }
-
-
-
-
+    if(in.base_["dub"][0].t!=2||in.base_["ubba"][0].file!="ubba.txt"){
+        cout<<"erro 3\n";
+    }else{
+        cout<<"3 OK\n";
+    }
     return 0;
 }

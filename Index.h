@@ -7,10 +7,22 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <stdlib.h>
 using namespace std;
 
 //frequência, struct que aramazena o nome de um arquivo e o número de vezes que a palavra associada apareceu nesse arquivo
-struct freq;
+typedef struct freq{
+    string file;
+    int t;
+    freq(){
+        file = "";
+        t = 0;
+    }
+    freq(string s, int n){
+        file = s;
+        t = n;
+    }
+};
 
 class Index{
 public:
@@ -29,11 +41,12 @@ public:
     void AddDataFromFile(vector<ifstream> varq);
     //destrutor
     //~Index();
-private:
     map<string,vector<freq> > base_;
+private:
     //adiciona uma variável do tipo frequência(freq) ao vetor de uma palavra que já existe no índice
     void addOldWord(freq f);
     //remove do mapa o nó com a chave s
     void removeKey(string s);
+    friend class Teste;
 };
 #endif

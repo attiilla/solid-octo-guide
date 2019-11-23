@@ -6,47 +6,54 @@
 #include <iterator>
 #include <string>
 #include <map>
+#include <algorithm>
+#include <cctype>
 #include <vector>
 #include <stdlib.h>
+#include <math.h>
+
 using namespace std;
 
-//frequência, struct que aramazena o nome de um arquivo e o número de vezes que a palavra associada apareceu nesse arquivo
-typedef struct freq{
-    string file;
-    int t;
-    freq(){
-        file = "";
-        t = 0;
-    }
-    freq(string s, int n){
-        file = s;
-        t = n;
-    }
-};
+
 
 class Index{
 public:
-    //constrói um índice vazio
-    Index();
-    //constrói um índice com os valores do arquivo de nome citado
-    Index(string c);
-    //constrói um índice com todos os valores dos arquivos do vetor varq
+    //rodar
+    void run();
+
     //converte o arquivo de nome c em um vetor de strings
     vector<string> Conv(string c);
-    //formata um vetor de strings para retirar símbolo
+
+    //formata um vetor de strings para retirar símbolos e tornar as letras minúsculas
     void Form(vector<string>& vc);
-    //adiciona as informações do aquivo arq a um índice pre-existente
-    void AddDataFromFile(ifstream arq);
-    //adiciona as informações do aquivo arq a um índice pre-existente
-    void AddDataFromFile(vector<ifstream> varq);
-    //destrutor
-    //~Index();
-    map<string,vector<freq> > base_;
+
+    ////formata uma string para tornar suas letras minúsculas
+    void Form(string c);
+
+    //adiciona as informações do aquivo arq de nome c ao mapa, j é a ordem em que ele é lido(0 para o primeiro, 1 para o segundo, etc)
+    void AddFile(string c, int j);
+
+    //adiciona todas as palavras de vc ao mapa, j associa essas informações ao elmento v[j] do vector do mapa
+    void AddFile(vector<string> vc, int j);
+
+    //exibe todos os elementos do vector que relacionado a chave c do mapa(base_[c])
+    void Print(string c);
+
+    //retorna t_
+    int filenum() const;
+
+    //calcula importância de c
+    double idf(string c);
+
+    //calcula a semelhança entre a querry e o arquivo de numero i
+    double sim(vector<string> q, int i);
+
+
 private:
-    //adiciona uma variável do tipo frequência(freq) ao vetor de uma palavra que já existe no índice
-    void addOldWord(freq f);
-    //remove do mapa o nó com a chave s
-    void removeKey(string s);
+    map<string, int[50]> base_;
+    int t_;
+    vector<string> keys_;
+    void SetSize(int i);
     friend class Teste;
 };
 #endif
